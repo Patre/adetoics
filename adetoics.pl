@@ -2,9 +2,9 @@
 
 # Author: Jean-Edouard BABIN, je.babin in telecom-bretagne.eu
 # Extended by:
-#	Ronan Keryell, rk in enstb.org
-#	Matthieu Moy, Matthieu.Moy in grenoble-inp.fr
-#	François Revol, Francois.Revol in imag.fr
+#  Ronan Keryell, rk in enstb.org
+#  Matthieu Moy, Matthieu.Moy in grenoble-inp.fr
+#  François Revol, Francois.Revol in imag.fr
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 # - Base config should be in an external file.
 # - TZID should not be statically set.
 # - Add possibility to stop the script before starting to log on the website if option c match some string
-#	(would be usefull for the cgi version where some users still try to load older project no longer used
+#  (would be usefull for the cgi version where some users still try to load older project no longer used
 #
 # For history see the end of the script
 
@@ -118,7 +118,7 @@ $opts{'s'} = $default_school;
 
 if (!defined $ENV{REQUEST_METHOD}) {
 
-	GetOptions(\%opts, 'y=s', 'n=s', 'a=s', 'u=s', 'l=s', 's=s', 'p:s', 'w!', 'v!', 'd=s', 'c!', 'b:s');
+  GetOptions(\%opts, 'y=s', 'n=s', 'a=s', 'u=s', 'l=s', 's=s', 'p:s', 'w!', 'v!', 'd=s', 'c!', 'b:s');
 
   $opts{'u'} = $opts{'u'} || $default_config{$opts{'s'}}{'u'};
   $opts{'l'} = $opts{'l'} || $default_config{$opts{'s'}}{'l'};
@@ -157,61 +157,61 @@ if (!defined $ENV{REQUEST_METHOD}) {
     exit 1;
   }
 } else {
-	print header(-type => 'text/calendar; method=request; charset=UTF-8;', -attachment => 'edt.ics');
-	if (defined(param('a')) or defined(param('n'))) {
-		print "$opts{'b'}\n";
-		$opts{'s'} = param('s') if (defined(param('s')));
+  print header(-type => 'text/calendar; method=request; charset=UTF-8;', -attachment => 'edt.ics');
+  if (defined(param('a')) or defined(param('n'))) {
+    print "$opts{'b'}\n";
+    $opts{'s'} = param('s') if (defined(param('s')));
 
-		$opts{'u'} = $default_config{$opts{'s'}}{'u'};
-		$opts{'l'} = $default_config{$opts{'s'}}{'l'};
-		$opts{'p'} = $default_config{$opts{'s'}}{'p'};
-		$opts{'w'} = $default_config{$opts{'s'}}{'w'};
-		$opts{'v'} = $default_config{$opts{'s'}}{'v'};
-		$opts{'d'} = $default_config{$opts{'s'}}{'d'};
-		$opts{'c'} = $default_config{$opts{'s'}}{'c'};
-		$opts{'b'} = $default_config{$opts{'s'}}{'b'};
+    $opts{'u'} = $default_config{$opts{'s'}}{'u'};
+    $opts{'l'} = $default_config{$opts{'s'}}{'l'};
+    $opts{'p'} = $default_config{$opts{'s'}}{'p'};
+    $opts{'w'} = $default_config{$opts{'s'}}{'w'};
+    $opts{'v'} = $default_config{$opts{'s'}}{'v'};
+    $opts{'d'} = $default_config{$opts{'s'}}{'d'};
+    $opts{'c'} = $default_config{$opts{'s'}}{'c'};
+    $opts{'b'} = $default_config{$opts{'s'}}{'b'};
 
-		$opts{'a'} = param('a');
-		$opts{'n'} = param('n');
-		$opts{'b'} = param('b'); 
-		$opts{'y'} = param('y') if (defined(param('y')));
-		$opts{'u'} = param('u') if (defined(param('u')));
-		$opts{'l'} = param('l') if (defined(param('l')));
-		$opts{'p'} = param('p') if (defined(param('p')));
-		$opts{'w'} = param('w') if (defined(param('w')));
-		$opts{'c'} = param('c') if (defined(param('c')));
-		$opts{'d'} = param('d') if (defined(param('d')));
-		print"$opts{'b'}\n";
-#		$opts{'v'} = param('v') if (defined(param('v')));
-	} else {
-		print "Usage: $0?n=Numerical_Value[&y=Project_Name][&s=school][&u=base_url][&l=login][&p=password][&w][&c][&d=domain]\n";
-		print "       $0?a=Alphabetical_path[&y=Project_Name][&s=school][&u=base_url][&l=login][&p=password][&w][&c][&d=domain]\n";
-		exit 1;
-	}
+    $opts{'a'} = param('a');
+    $opts{'n'} = param('n');
+    $opts{'b'} = param('b'); 
+    $opts{'y'} = param('y') if (defined(param('y')));
+    $opts{'u'} = param('u') if (defined(param('u')));
+    $opts{'l'} = param('l') if (defined(param('l')));
+    $opts{'p'} = param('p') if (defined(param('p')));
+    $opts{'w'} = param('w') if (defined(param('w')));
+    $opts{'c'} = param('c') if (defined(param('c')));
+    $opts{'d'} = param('d') if (defined(param('d')));
+    print"$opts{'b'}\n";
+#    $opts{'v'} = param('v') if (defined(param('v')));
+  } else {
+    print "Usage: $0?n=Numerical_Value[&y=Project_Name][&s=school][&u=base_url][&l=login][&p=password][&w][&c][&d=domain]\n";
+    print "       $0?a=Alphabetical_path[&y=Project_Name][&s=school][&u=base_url][&l=login][&p=password][&w][&c][&d=domain]\n";
+    exit 1;
+  }
 }
 
 if ((defined($opts{'p'})) and ($opts{'p'} eq "")) {
-	print "Please input password: ";
-	ReadMode('noecho');
-	$opts{'p'} = ReadLine(0);
-	chomp $opts{'p'};
-	ReadMode('normal');
+  print "Please input password: ";
+  ReadMode('noecho');
+  $opts{'p'} = ReadLine(0);
+  chomp $opts{'p'};
+  ReadMode('normal');
 }
 
 if ($opts{'w'}) {
-	# Create a time stamped output file:
-	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	my $output_file_name = sprintf("calendar.%d-%02d-%02d_%02d:%02d:%02d.ics",
+  # Create a time stamped output file:
+  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+  my $output_file_name = sprintf("calendar.%d-%02d-%02d_%02d:%02d:%02d.ics",
                                   $year+1900, $mon, $mday, $hour, $min, $sec);
-	close(STDOUT);
-	open(STDOUT, ">", $output_file_name) or die "open of " . $output_file_name . " failed!";
+  close(STDOUT);
+  open(STDOUT, ">", $output_file_name) or die "open of " . $output_file_name . " failed!";
 }
 
 push (@tree,$opts{'y'});
 foreach (split(':', $opts{'a'})) {
-	push (@tree,$_);
-	# $opts{'c'} is ProjectID:Category:branchId:branchId:branchId but of course in text instead of ID
-	# The job is to find the latest branchId ID then parse schedule
+  push (@tree,$_);
+  # $opts{'c'} is ProjectID:Category:branchId:branchId:branchId but of course in text instead of ID
+  # The job is to find the latest branchId ID then parse schedule
 }
 
 my $mech = WWW::Mechanize->new(agent => 'ADEics 0.2', cookie_jar => {});
@@ -223,7 +223,7 @@ debug_url($mech, '010', $opts{'v'});
 die "Error 1 : failed to load welcome page. Check if base_url works." if (!$mech->success());
 
 #if ($opts{'c'}) {
-#	$mech->submit_form(fields => {username => $opts{'l'}, password => $opts{'p'}, domain => $opts{'d'}});
+#  $mech->submit_form(fields => {username => $opts{'l'}, password => $opts{'p'}, domain => $opts{'d'}});
 #} else {
 $mech->submit_form(fields => {login => $opts{'l'}, password => $opts{'p'}});
 #}
@@ -231,9 +231,9 @@ debug_url($mech, '020', $opts{'v'});
 die "Error 2 : Login failed." if (!$mech->success());
 
 #if ($opts{'c'}) {
-#	$mech->follow_link( n => 1 );
-#		debug_url($mech, '021', $opts{'v'});
-#	die "Error 2.1" if (!$mech->success());
+#  $mech->follow_link( n => 1 );
+#    debug_url($mech, '021', $opts{'v'});
+#  die "Error 2.1" if (!$mech->success());
 #}
 
 # Getting projet list
@@ -248,61 +248,61 @@ my $token = $p->get_tag("select");
 my $projid = -1;
 my %availableproject;
 while (($projid == -1) && (my $token = $p->get_tag("option"))) {
-	my $pname = $p->get_trimmed_text;
-	if($pname eq $tree[0]) {
-		$projid = $token->[1]{value};
-	}
-	$availableproject{$pname} = 1;
+  my $pname = $p->get_trimmed_text;
+  if($pname eq $tree[0]) {
+    $projid = $token->[1]{value};
+  }
+  $availableproject{$pname} = 1;
 }
 
 # ADE allow to select a project but no one has been selected
 if (($projid == -1) && (%availableproject)) {
-	my ($tssec,$tsmin,$tshour,$tsmday,$tsmon,$tsyear,$tswday,$tsyday,$tsisdst) = gmtime();
-	my $dtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour, $tsmin, $tssec);
-	my $edtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour+2, $tsmin, $tssec);
+  my ($tssec,$tsmin,$tshour,$tsmday,$tsmon,$tsyear,$tswday,$tsyday,$tsisdst) = gmtime();
+  my $dtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour, $tsmin, $tssec);
+  my $edtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour+2, $tsmin, $tssec);
 
-	print "BEGIN:VCALENDAR\n";
-	print "VERSION:2.0\n";   
-	print "PRODID:-//Jeb//edt.pl//EN\n";
-	print "BEGIN:VTIMEZONE\n";         
-	print "X-WR-CALNAME:ADE2ics\n";    
-	print "TZID:\"GMT +0100 (Standard) / GMT +0200 (Daylight)\"\n";  
-	print "END:VTIMEZONE\n";                                        
-	print "METHOD:PUBLISH\n";                                      
-	print "BEGIN:VEVENT\n";
-	print "DTSTART:$dtstamp\n";
-	print "DTEND:$edtstamp\n";
-	print "DTSTAMP:$dtstamp\n";
-	print "UID:edt-out\n";
-	print "SUMMARY:Project $tree[0] does not exist\n";
-	print "DESCRIPTION:";
-	print "The requested project '$tree[0]' does not exist. Existing projects are :".'\n';
-	print "$_".'\n' foreach (sort keys %availableproject);
-	print "\n";
-	print "END:VEVENT\n";
-	print "END:VCALENDAR\n";
+  print "BEGIN:VCALENDAR\n";
+  print "VERSION:2.0\n";   
+  print "PRODID:-//Jeb//edt.pl//EN\n";
+  print "BEGIN:VTIMEZONE\n";         
+  print "X-WR-CALNAME:ADE2ics\n";    
+  print "TZID:\"GMT +0100 (Standard) / GMT +0200 (Daylight)\"\n";  
+  print "END:VTIMEZONE\n";                                        
+  print "METHOD:PUBLISH\n";                                      
+  print "BEGIN:VEVENT\n";
+  print "DTSTART:$dtstamp\n";
+  print "DTEND:$edtstamp\n";
+  print "DTSTAMP:$dtstamp\n";
+  print "UID:edt-out\n";
+  print "SUMMARY:Project $tree[0] does not exist\n";
+  print "DESCRIPTION:";
+  print "The requested project '$tree[0]' does not exist. Existing projects are :".'\n';
+  print "$_".'\n' foreach (sort keys %availableproject);
+  print "\n";
+  print "END:VEVENT\n";
+  print "END:VCALENDAR\n";
 
-	die "Error 3 : $tree[0] does not exist";
+  die "Error 3 : $tree[0] does not exist";
 } elsif (%availableproject) {
-	$mech->submit_form(fields => {projectId => $projid});
-	debug_url($mech, '040', $opts{'v'});
-	die "Error 4 : Can't select $tree[0]." if (!$mech->success());
+  $mech->submit_form(fields => {projectId => $projid});
+  debug_url($mech, '040', $opts{'v'});
+  die "Error 4 : Can't select $tree[0]." if (!$mech->success());
 } else {
-	warn "Assuming single project\n";
-	# TODO: Check project name printed in the top frame of standard/projects.jsp request
+  warn "Assuming single project\n";
+  # TODO: Check project name printed in the top frame of standard/projects.jsp request
 }
 
 
 if ($opts{'a'}) {
-	# Usage of -a, we need to find the numerical value of It
+  # Usage of -a, we need to find the numerical value of It
 
-	# We need to load tree.jsp to find category name
-	$mech->get($opts{'u'}.'standard/gui/tree.jsp');
-	debug_url($mech, '050', $opts{'v'});
-	die "Error 5 : Can't load standard/gui/tree.jsp." if (!$mech->success());
+  # We need to load tree.jsp to find category name
+  $mech->get($opts{'u'}.'standard/gui/tree.jsp');
+  debug_url($mech, '050', $opts{'v'});
+  die "Error 5 : Can't load standard/gui/tree.jsp." if (!$mech->success());
 
-	# So, find it
-	$p = HTML::TokeParser->new(\$mech->content);
+  # So, find it
+  $p = HTML::TokeParser->new(\$mech->content);
   $token = $p->get_tag("div");
 
   my $category;
@@ -342,19 +342,19 @@ if ($opts{'a'}) {
     } else {
       $mech->get($opts{'u'}.'standard/gui/tree.jsp?branchId='.$branchId.'&expand=false&forceLoad=false&reload=false&scroll=0');
     }
-	}
+  }
 
-	$opts{'n'} = $branchId;
-	debug_url($mech, '091', $opts{'v'});
-	die "Error 9.1 : $tree[$#tree] does not exist" if (!defined($branchId));
+  $opts{'n'} = $branchId;
+  debug_url($mech, '091', $opts{'v'});
+  die "Error 9.1 : $tree[$#tree] does not exist" if (!defined($branchId));
 
 }
 
 # We run this part even if option a has been supllied because if this URL is not load the 'force displayed fields' part of the script did not work - quite strange!
 if ($opts{'n'}) {
-	$mech->get($opts{'u'}.'custom/modules/plannings/direct_planning.jsp?resources='.$opts{'n'});
-	debug_url($mech, '092', $opts{'v'});
-	die "Error 9.2 : Can't load custom/modules/plannings/direct_planning.jsp?resources=".$opts{'n'} if (!$mech->success());
+  $mech->get($opts{'u'}.'custom/modules/plannings/direct_planning.jsp?resources='.$opts{'n'});
+  debug_url($mech, '092', $opts{'v'});
+  die "Error 9.2 : Can't load custom/modules/plannings/direct_planning.jsp?resources=".$opts{'n'} if (!$mech->success());
 }
 
 # We need to choose a week
@@ -372,28 +372,28 @@ $mech->get($opts{'u'}.'custom/modules/plannings/appletparams.jsp');
 debug_url($mech, '102', $opts{'v'});
 die "Error 10.2 : failed to load config page." if (!$mech->success());
 # Activity / Activités
-$mech->field("showTabActivity", "true");	# Nom
-$mech->field("showTabWeek", "false");	# Semaine
-$mech->field("showTabDay", "false");		# Jour
-$mech->field("showTabStage", "false");	# Stage
-$mech->field("showTabDate", "true");		# Date
-$mech->field("showTabHour", "true");		# Heure
-$mech->field("aC", "false");				# Code
-$mech->field("aTy", "false");			# Type
-$mech->field("aUrl", "false");			# Url
-$mech->field("showTabDuration", "true");	# Durée
-$mech->field("aSize", "false");			# Capacité
-$mech->field("aMx", "false");			# Nombre de siøges
-$mech->field("aSl", "false");			# Siøges disponibles
-$mech->field("aCx", "false");			# Code X
-$mech->field("aCy", "false");			# Code Y
-$mech->field("aCz", "false");			# Code Z
-$mech->field("aTz", "false");			# Fuseau horaire
-$mech->field("aN", "false");				# Notes
-$mech->field("aNe", "false");			# Note de séance
+$mech->field("showTabActivity", "true");  # Nom
+$mech->field("showTabWeek", "false");  # Semaine
+$mech->field("showTabDay", "false");    # Jour
+$mech->field("showTabStage", "false");  # Stage
+$mech->field("showTabDate", "true");    # Date
+$mech->field("showTabHour", "true");    # Heure
+$mech->field("aC", "false");        # Code
+$mech->field("aTy", "false");      # Type
+$mech->field("aUrl", "false");      # Url
+$mech->field("showTabDuration", "true");  # Durée
+$mech->field("aSize", "false");      # Capacité
+$mech->field("aMx", "false");      # Nombre de siøges
+$mech->field("aSl", "false");      # Siøges disponibles
+$mech->field("aCx", "false");      # Code X
+$mech->field("aCy", "false");      # Code Y
+$mech->field("aCz", "false");      # Code Z
+$mech->field("aTz", "false");      # Fuseau horaire
+$mech->field("aN", "false");        # Notes
+$mech->field("aNe", "false");      # Note de séance
 
 # Trainees / Etudiants
-$mech->field("showTabTrainees", "true");	# Nom
+$mech->field("showTabTrainees", "true");  # Nom
 $mech->field("sC", "false");
 $mech->field("sTy", "false");
 $mech->field("sUrl", "false");
@@ -414,7 +414,7 @@ $mech->field("sCz", "false");
 $mech->field("sTz", "false");
 
 # Instructors / Enseignants
-$mech->field("showTabInstructors", "true");	# Nom
+$mech->field("showTabInstructors", "true");  # Nom
 $mech->field("iC", "false");
 $mech->field("iTy", "false");
 $mech->field("iUrl", "false");
@@ -435,7 +435,7 @@ $mech->field("iCz", "false");
 $mech->field("iTz", "false");
 
 # Rooms / Salles
-$mech->field("showTabRooms", "true");	# Nom
+$mech->field("showTabRooms", "true");  # Nom
 $mech->field("roC", "false");
 $mech->field("roTy", "false");
 $mech->field("roUrl", "false");
@@ -590,8 +590,8 @@ print "END:VCALENDAR\n";
 sub ics_output {
   # Parse the data and generate records that tends toward
   # http://www.ietf.org/rfc/rfc2445.txt :-)
-	my $data = $_[0];
-	my $p = HTML::TokeParser->new(\$data);
+  my $data = $_[0];
+  my $p = HTML::TokeParser->new(\$data);
 
   $token = $p->get_tag("table");
   $token = $p->get_tag("tr");
@@ -669,19 +669,19 @@ sub ics_output {
 
     #######################################
     if(0) { #used for debug
-      print "Date:		$date\n";
-      print "Id:		$id\n";
-      print "course:		$course\n";
-      print "hour:		$hour\n";
-      print "duration:	$duration\n";
-      print "trainers:	$trainers\n";
-      print "trainees:	$trainees\n";
-      print "rooms:		$rooms\n";
-      print "equipment:	$equipment\n";
-      print "statuts:		$statuts\n";
-      print "groupes:	$groupes\n";
-      print "module:		$module\n";
-      print "formation_UV:	$formation_UV\n";
+      print "Date:    $date\n";
+      print "Id:    $id\n";
+      print "course:    $course\n";
+      print "hour:    $hour\n";
+      print "duration:  $duration\n";
+      print "trainers:  $trainers\n";
+      print "trainees:  $trainees\n";
+      print "rooms:    $rooms\n";
+      print "equipment:  $equipment\n";
+      print "statuts:    $statuts\n";
+      print "groupes:  $groupes\n";
+      print "module:    $module\n";
+      print "formation_UV:  $formation_UV\n";
       print "\n";
       next;
     }
@@ -737,17 +737,17 @@ sub ics_output {
           print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
           print "SUMMARY:$course\n";
           print "DTSTAMP:$dtstamp\n";
-          print "UID:edt-$id-0\n";		
+          print "UID:edt-$id-0\n";    
           print "DESCRIPTION:";
           print "Salle : $rooms".'\n';
           print "Enseignants : $trainers".'\n';
           print "Cours : $course".'\n' if ($course !~ /^\s+$/);
           print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
-          print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
-          print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
+          print "Groupes  : $groupes".'\n' if ($groupes !~ /^\s+$/);
+          print "Modules  : $module".'\n' if ($module !~ /^\s+$/);
           print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
           print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
-          print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
+          print "Statuts  : $statuts" if ($statuts !~ /^\s+$/);
           print "\n";
           print "LOCATION:$rooms\n";
           print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
@@ -761,17 +761,17 @@ sub ics_output {
       print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
       print "SUMMARY:$course\n";
       print "DTSTAMP:$dtstamp\n";
-      print "UID:edt-$id-0\n";		
+      print "UID:edt-$id-0\n";    
       print "DESCRIPTION:";
       print "Salle : $rooms".'\n';
       print "Enseignants : $trainers".'\n';
       print "Cours : $course".'\n' if ($course !~ /^\s+$/);
       print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
-      print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
-      print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
+      print "Groupes  : $groupes".'\n' if ($groupes !~ /^\s+$/);
+      print "Modules  : $module".'\n' if ($module !~ /^\s+$/);
       print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
       print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
-      print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
+      print "Statuts  : $statuts" if ($statuts !~ /^\s+$/);
       print "\n";
       print "LOCATION:$rooms\n";
       print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
@@ -781,15 +781,15 @@ sub ics_output {
 }
 
 sub debug_url {
-	my ($mech, $file_number, $d) = @_;
+  my ($mech, $file_number, $d) = @_;
 
-	if ($d) {
-		my $file_name = "ade2ics-debug-".$file_number.".html";
-		open(FILE, ">$file_name") or die "Can't open file $file_name: $!";
-		print FILE "<!--".$mech->uri()."-->\n";
-		print FILE $mech->content."\n";
-		close(FILE);
-	}
+  if ($d) {
+    my $file_name = "ade2ics-debug-".$file_number.".html";
+    open(FILE, ">$file_name") or die "Can't open file $file_name: $!";
+    print FILE "<!--".$mech->uri()."-->\n";
+    print FILE $mech->content."\n";
+    close(FILE);
+  }
 }
 
 
