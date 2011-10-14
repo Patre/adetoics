@@ -21,7 +21,14 @@ Voici la marche à suivre pour importer son emploi du temps dans un gestionnaire 
   	/usr/local/share/perl/5.10.1 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.10 
    	/usr/share/perl/5.10 /usr/local/lib/site_perl .) at ade2ics.pl line 34.
 	BEGIN failed--compilation aborted at ade2ics.pl line 34.
-Cela signifie que vous devez installer le package Perl Mechanize.pm à l'adresse suivante : http://search.cpan.org/ .
+Cela signifie que vous devez installer le package Perl WWW::Mechanize.pm à l'adresse suivante : http://search.cpan.org/ .
+Voici la liste complète des paquets nécessaires :
+- WWW::Mechanize;
+- HTTP::Cookies;
+- HTML::TokeParser;
+- Term::ReadKey;
+- Getopt::Long;
+- Time::Local;
 
 
 - À ce stade, vous pouvez lancer le script dans un terminal. Voici un exemple de ligne de commande pour appeler le script (vous devez d'abord faire un cd pour être dans le répertoire du script) :
