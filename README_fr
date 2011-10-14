@@ -5,24 +5,24 @@ Auteur initial : Jean-Edouard BABIN, je.babin in telecom-bretagne.eu
 Contributeurs :
 		Ronan Keryell, rk in enstb.org
 		Matthieu Moy, Matthieu.Moy in grenoble-inp.fr
-		François Revol, Francois.Revol in imag.fr
+		Fran√ßois Revol, Francois.Revol in imag.fr
 
-Contributeurs pour l'adaptation à l'UM2 :
-		Desdouits Chloé, chloe.desdouits@etud.univ-montp2.fr
-		Duvillié Guillerme
-		Clément Sipieter
+Contributeurs pour l'adaptation √† l'UM2 :
+		Desdouits Chlo√©, chloe.desdouits@etud.univ-montp2.fr
+		Duvilli√© Guillerme
+		Cl√©ment Sipieter
 
 
-adetoics.pl est un script Perl permettant de récupérer des informations sur l'interface web de l'emploi du temps ADE en ligne et de les exporter dans un fichier au format .ics .
-Voici la marche à suivre pour importer son emploi du temps dans un gestionnaire de calendrier (Google Agenda dans cet exemple) : 
+adetoics.pl est un script Perl permettant de r√©cup√©rer des informations sur l'interface web de l'emploi du temps ADE en ligne et de les exporter dans un fichier au format .ics .
+Voici la marche √† suivre pour importer son emploi du temps dans un gestionnaire de calendrier (Google Agenda dans cet exemple) : 
 
-- Le premier prérequis est d'avoir Perl installé. Il faut également quelques paquets supplémentaires. Si au lancement du script vous obtenez une erreur comme celle-ci :
+- Le premier pr√©requis est d'avoir Perl install√©. Il faut √©galement quelques paquets suppl√©mentaires. Si au lancement du script vous obtenez une erreur comme celle-ci :
 	Can't locate WWW/Mechanize.pm in @INC (@INC contains: /etc/perl /usr/local/lib/perl/5.10.1 
   	/usr/local/share/perl/5.10.1 /usr/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.10 
    	/usr/share/perl/5.10 /usr/local/lib/site_perl .) at ade2ics.pl line 34.
 	BEGIN failed--compilation aborted at ade2ics.pl line 34.
-Cela signifie que vous devez installer le package Perl WWW::Mechanize.pm à l'adresse suivante : http://search.cpan.org/ .
-Voici la liste complète des paquets nécessaires :
+Cela signifie que vous devez installer le package Perl WWW::Mechanize.pm √† l'adresse suivante : http://search.cpan.org/ .
+Voici la liste compl√®te des paquets n√©cessaires :
 - WWW::Mechanize;
 - HTTP::Cookies;
 - HTML::TokeParser;
@@ -31,13 +31,13 @@ Voici la liste complète des paquets nécessaires :
 - Time::Local;
 
 
-- À ce stade, vous pouvez lancer le script dans un terminal. Voici un exemple de ligne de commande pour appeler le script (vous devez d'abord faire un cd pour être dans le répertoire du script) :
+- √Ä ce stade, vous pouvez lancer le script dans un terminal. Voici un exemple de ligne de commande pour appeler le script (vous devez d'abord faire un cd pour √™tre dans le r√©pertoire du script) :
 
 $ perl adetoics.pl -b FMIN108,FMIN105,FMIN302,GMIN101,GMIN104,FMIN104 -n 125 > ~/Desktop/calendar.ics
 
-Dans cette commande, l'argument "-b CodeUE1,CodeUE2,…" vous permet de spécifier les codes des UEs que vous suivez. 
-L'argument "-n 125" indique que ces UEs font partie du parcours Master 1 Informatique. Pour accéder aux UEs d'autres filières, vous pouvez trouver le numéro de ces filières en regardant l'emploi du temps sur le site de la fac. En effet, lorsque vous placez votre souris en survol d'une filière dans le menu à gauche, dans la barre d'adresse s'affiche quelque chose du style : 'javascript:checkBranch(125, 'true')' où le premier paramètre est le numéro de la filière.
-Enfin, la dernière partie de la commande : " > ~/Desktop/calendar.ics" permet de rediriger la sortie du script vers un fichier localisé à l'emplacement indiqué.
+Dans cette commande, l'argument "-b CodeUE1,CodeUE2,‚Ä¶" vous permet de sp√©cifier les codes des UEs que vous suivez. 
+L'argument "-n 125" indique que ces UEs font partie du parcours Master 1 Informatique. Pour acc√©der aux UEs d'autres fili√®res, vous pouvez trouver le num√©ro de ces fili√®res en regardant l'emploi du temps sur le site de la fac. En effet, lorsque vous placez votre souris en survol d'une fili√®re dans le menu √† gauche, dans la barre d'adresse s'affiche quelque chose du style : 'javascript:checkBranch(125, 'true')' o√π le premier param√®tre est le num√©ro de la fili√®re.
+Enfin, la derni√®re partie de la commande : " > ~/Desktop/calendar.ics" permet de rediriger la sortie du script vers un fichier localis√© √† l'emplacement indiqu√©.
 
 
-- Il ne reste plus qu'à importer le fichier généré (calendar.ics par exemple) dans un gestionnaire de calendrier. Par exemple sur Google Agenda : allez sur votre agenda ; cliquez sur la flèche à côté de "Autres agendas" dans le menu de gauche ; sélectionnez "Importer l'agenda" ; cliquez sur "parcourir…" puis choisissez le fichier ici.
+- Il ne reste plus qu'√† importer le fichier g√©n√©r√© (calendar.ics par exemple) dans un gestionnaire de calendrier. Par exemple sur Google Agenda : allez sur votre agenda ; cliquez sur la fl√®che √† c√¥t√© de "Autres agendas" dans le menu de gauche ; s√©lectionnez "Importer l'agenda" ; cliquez sur "parcourir‚Ä¶" puis choisissez le fichier ici.
