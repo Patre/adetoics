@@ -222,19 +222,19 @@ $mech->get($opts{'u'}.'standard/index.jsp');
 debug_url($mech, '010', $opts{'v'});
 die "Error 1 : failed to load welcome page. Check if base_url works." if (!$mech->success());
 
-#if ($opts{'c'}) {
-#  $mech->submit_form(fields => {username => $opts{'l'}, password => $opts{'p'}, domain => $opts{'d'}});
-#} else {
+if ($opts{'c'}) {
+  $mech->submit_form(fields => {username => $opts{'l'}, password => $opts{'p'}, domain => $opts{'d'}});
+} else {
 $mech->submit_form(fields => {login => $opts{'l'}, password => $opts{'p'}});
-#}
+}
 debug_url($mech, '020', $opts{'v'});
 die "Error 2 : Login failed." if (!$mech->success());
 
-#if ($opts{'c'}) {
-#  $mech->follow_link( n => 1 );
-#    debug_url($mech, '021', $opts{'v'});
-#  die "Error 2.1" if (!$mech->success());
-#}
+if ($opts{'c'}) {
+  $mech->follow_link( n => 1 );
+    debug_url($mech, '021', $opts{'v'});
+  die "Error 2.1" if (!$mech->success());
+}
 
 # Getting projet list
 $mech->get($opts{'u'}.'standard/projects.jsp');
