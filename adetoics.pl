@@ -120,42 +120,42 @@ if (!defined $ENV{REQUEST_METHOD}) {
 
 	GetOptions(\%opts, 'y=s', 'n=s', 'a=s', 'u=s', 'l=s', 's=s', 'p:s', 'w!', 'v!', 'd=s', 'c!', 'b:s');
 
-$opts{'u'} = $opts{'u'} || $default_config{$opts{'s'}}{'u'};
-$opts{'l'} = $opts{'l'} || $default_config{$opts{'s'}}{'l'};
-$opts{'p'} = $opts{'p'} || $default_config{$opts{'s'}}{'p'};
-$opts{'w'} = $opts{'w'} || $default_config{$opts{'s'}}{'w'};
-$opts{'v'} = $opts{'v'} || $default_config{$opts{'s'}}{'v'};
-$opts{'d'} = $opts{'d'} || $default_config{$opts{'s'}}{'d'};
-$opts{'b'} = $opts{'b'} || $default_config{$opts{'s'}}{'b'};
+  $opts{'u'} = $opts{'u'} || $default_config{$opts{'s'}}{'u'};
+  $opts{'l'} = $opts{'l'} || $default_config{$opts{'s'}}{'l'};
+  $opts{'p'} = $opts{'p'} || $default_config{$opts{'s'}}{'p'};
+  $opts{'w'} = $opts{'w'} || $default_config{$opts{'s'}}{'w'};
+  $opts{'v'} = $opts{'v'} || $default_config{$opts{'s'}}{'v'};
+  $opts{'d'} = $opts{'d'} || $default_config{$opts{'s'}}{'d'};
+  $opts{'b'} = $opts{'b'} || $default_config{$opts{'s'}}{'b'};
 
 
-if (!(defined($opts{'a'}) xor defined($opts{'n'})) ) {
-	print STDERR "Usage: $0 -a Alphabetical_path [-y Projet_name] [-s school_name] [-l login] [-p [password]] [-u ade_url] [-c [-d domain]] [-w] [-v]\n";
-	print STDERR "Usage: $0 -n Numerical_value   [-y Projet_name] [-s school_name] [-l login] [-p [password]] [-u ade_url] [-c [-d domain]] [-w] [-v]\n";
-	print STDERR " -a : alphabetical path through the ressource, encoded in ISO-8859-1 (see examples)\n";
-	print STDERR " -n : numerical value of the ressource\n";
-	print STDERR " -b : list of your personnal courses\n";
-	print STDERR " -y : the projet name if needed\n";
-	print STDERR " -s : school name. It loads a set of default value for -u -l -p -w -c -d for your school. Default school is : $default_school. Available school are (case sensitive):\n";
-	print STDERR "\t- $_\n" foreach (keys %default_config);
-	print STDERR " -u : the ADE location to peek into\n";
-	print STDERR " -l : login name for authentication purpose\n";
-	print STDERR " -p : password to use for authentication purpose\n";
-	print STDERR "\t if you just use -p without password, you will be prompted for it. recommanded for security !\n";
-	print STDERR " -w : write the schedule in time-stamped \"calendar.\" file to track modifications to your calendar.\n";
-	print STDERR " -c : enable CAS Authentification, as used at Telecom Bretagne\n";
-	print STDERR " -d : set domain name to use for CAS authentification\n";
-	print STDERR " -v : enable verbose/debug output (will write file on disk)\n";
-	print STDERR "\nSome examples:\n";
-	print STDERR " $0 -l jebabin -p -y '2007-2008' -a 'Etudiants:FIP:FIP 3A 2007-2008:BABIN Jean-Edouard'\n";
-	print STDERR " $0 -e Ensimag -p some_password -y 'ENSIMAG2009-2010' -a 'Enseignants:M:Moy Matthieu'\n";
-	print STDERR " $0 -e Ensimag -p some_password -y 'ENSIMAG2009-2010' -n 717\n";
-	print STDERR " even more:\n";
-	print STDERR " $0 -c -l jebabin -p -y '2007-2008' -a 'Etudiants:FIP:FIP 3A 2007-2008:BABIN Jean-Edouard'\n";
-	print STDERR " $0 -w -c -l keryell -p some_password -y '2007-2008' -a 'Enseignants:H à K:KERYELL Ronan'\n";
-	print STDERR " $0 -u http://ade52-inpg.grenet.fr/ade/ -l voirIMATEL -p somepassword -y 'ENSIMAG2009-2010' -a 'Enseignants:M:Moy Matthieu'\n";
-	exit 1;
-}
+  if (!(defined($opts{'a'}) xor defined($opts{'n'})) ) {
+    print STDERR "Usage: $0 -a Alphabetical_path [-y Projet_name] [-s school_name] [-l login] [-p [password]] [-u ade_url] [-c [-d domain]] [-w] [-v]\n";
+    print STDERR "Usage: $0 -n Numerical_value   [-y Projet_name] [-s school_name] [-l login] [-p [password]] [-u ade_url] [-c [-d domain]] [-w] [-v]\n";
+    print STDERR " -a : alphabetical path through the ressource, encoded in ISO-8859-1 (see examples)\n";
+    print STDERR " -n : numerical value of the ressource\n";
+    print STDERR " -b : list of your personnal courses\n";
+    print STDERR " -y : the projet name if needed\n";
+    print STDERR " -s : school name. It loads a set of default value for -u -l -p -w -c -d for your school. Default school is : $default_school. Available school are (case sensitive):\n";
+    print STDERR "\t- $_\n" foreach (keys %default_config);
+    print STDERR " -u : the ADE location to peek into\n";
+    print STDERR " -l : login name for authentication purpose\n";
+    print STDERR " -p : password to use for authentication purpose\n";
+    print STDERR "\t if you just use -p without password, you will be prompted for it. recommanded for security !\n";
+    print STDERR " -w : write the schedule in time-stamped \"calendar.\" file to track modifications to your calendar.\n";
+    print STDERR " -c : enable CAS Authentification, as used at Telecom Bretagne\n";
+    print STDERR " -d : set domain name to use for CAS authentification\n";
+    print STDERR " -v : enable verbose/debug output (will write file on disk)\n";
+    print STDERR "\nSome examples:\n";
+    print STDERR " $0 -l jebabin -p -y '2007-2008' -a 'Etudiants:FIP:FIP 3A 2007-2008:BABIN Jean-Edouard'\n";
+    print STDERR " $0 -e Ensimag -p some_password -y 'ENSIMAG2009-2010' -a 'Enseignants:M:Moy Matthieu'\n";
+    print STDERR " $0 -e Ensimag -p some_password -y 'ENSIMAG2009-2010' -n 717\n";
+    print STDERR " even more:\n";
+    print STDERR " $0 -c -l jebabin -p -y '2007-2008' -a 'Etudiants:FIP:FIP 3A 2007-2008:BABIN Jean-Edouard'\n";
+    print STDERR " $0 -w -c -l keryell -p some_password -y '2007-2008' -a 'Enseignants:H à K:KERYELL Ronan'\n";
+    print STDERR " $0 -u http://ade52-inpg.grenet.fr/ade/ -l voirIMATEL -p somepassword -y 'ENSIMAG2009-2010' -a 'Enseignants:M:Moy Matthieu'\n";
+    exit 1;
+  }
 } else {
 	print header(-type => 'text/calendar; method=request; charset=UTF-8;', -attachment => 'edt.ics');
 	if (defined(param('a')) or defined(param('n'))) {
@@ -202,7 +202,7 @@ if ($opts{'w'}) {
 	# Create a time stamped output file:
 	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
 	my $output_file_name = sprintf("calendar.%d-%02d-%02d_%02d:%02d:%02d.ics",
-		$year+1900, $mon, $mday, $hour, $min, $sec);
+                                  $year+1900, $mon, $mday, $hour, $min, $sec);
 	close(STDOUT);
 	open(STDOUT, ">", $output_file_name) or die "open of " . $output_file_name . " failed!";
 }
@@ -224,10 +224,9 @@ die "Error 1 : failed to load welcome page. Check if base_url works." if (!$mech
 
 #if ($opts{'c'}) {
 #	$mech->submit_form(fields => {username => $opts{'l'}, password => $opts{'p'}, domain => $opts{'d'}});
-#} else 
-{
-	$mech->submit_form(fields => {login => $opts{'l'}, password => $opts{'p'}});
-}
+#} else {
+$mech->submit_form(fields => {login => $opts{'l'}, password => $opts{'p'}});
+#}
 debug_url($mech, '020', $opts{'v'});
 die "Error 2 : Login failed." if (!$mech->success());
 
@@ -304,45 +303,45 @@ if ($opts{'a'}) {
 
 	# So, find it
 	$p = HTML::TokeParser->new(\$mech->content);
-$token = $p->get_tag("div");
+  $token = $p->get_tag("div");
 
-my $category;
-while ((!defined($category)) && (my $token = $p->get_tag("a"))) {
-	if($p->get_trimmed_text eq $tree[1]) {
-		$category = $token->[1]{href};
-	}
-}
-$category =~ s/.*\('(.*?)'\)$/$1/;
-die "Error 6 : $tree[1] does not exist. Check argument to -a option." if (!defined($category));
+  my $category;
+  while ((!defined($category)) && (my $token = $p->get_tag("a"))) {
+    if($p->get_trimmed_text eq $tree[1]) {
+      $category = $token->[1]{href};
+    }
+  }
+  $category =~ s/.*\('(.*?)'\)$/$1/;
+  die "Error 6 : $tree[1] does not exist. Check argument to -a option." if (!defined($category));
 
-# We need to load the category chosed on command line to find branchID
-$mech->get($opts{'u'}.'standard/gui/tree.jsp?category='.$category.'&expand=false&forceLoad=false&reload=false&scroll=0');
-debug_url($mech, '070', $opts{'v'});
-die "Error 7 : Can't load standard/gui/tree.jsp?category=$category ..." if (!$mech->success());
+  # We need to load the category chosed on command line to find branchID
+  $mech->get($opts{'u'}.'standard/gui/tree.jsp?category='.$category.'&expand=false&forceLoad=false&reload=false&scroll=0');
+  debug_url($mech, '070', $opts{'v'});
+  die "Error 7 : Can't load standard/gui/tree.jsp?category=$category ..." if (!$mech->success());
 
-# We loop until last supplied branchID
-my $branchId;
-for (2..$#tree) {
-	undef $branchId;
+  # We loop until last supplied branchID
+  my $branchId;
+  for (2..$#tree) {
+    undef $branchId;
 
-	# find branch
-	$p = HTML::TokeParser->new(\$mech->content);
-$token = $p->get_tag("div");
+    # find branch
+    $p = HTML::TokeParser->new(\$mech->content);
+    $token = $p->get_tag("div");
 
-while ((!defined($branchId)) && (my $token = $p->get_tag("a"))) {
-	if($p->get_trimmed_text eq $tree[$_]) {
-		$branchId = $token->[1]{href};
-	}
-}
-$branchId =~ s/.*\((\d+),\s+.*/$1/;
-debug_url($mech, "08".$_, $opts{'v'});
-die "Error 8.$_ : $tree[$_] does not exist" if (!defined($branchId));
+    while ((!defined($branchId)) && (my $token = $p->get_tag("a"))) {
+      if($p->get_trimmed_text eq $tree[$_]) {
+        $branchId = $token->[1]{href};
+      }
+    }
+    $branchId =~ s/.*\((\d+),\s+.*/$1/;
+    debug_url($mech, "08".$_, $opts{'v'});
+    die "Error 8.$_ : $tree[$_] does not exist" if (!defined($branchId));
 
-if ($_ == $#tree) {
-	$mech->get($opts{'u'}.'standard/gui/tree.jsp?selectId='.$branchId.'&reset=true&forceLoad=false&scroll=0');
-} else {
-	$mech->get($opts{'u'}.'standard/gui/tree.jsp?branchId='.$branchId.'&expand=false&forceLoad=false&reload=false&scroll=0');
-}
+    if ($_ == $#tree) {
+      $mech->get($opts{'u'}.'standard/gui/tree.jsp?selectId='.$branchId.'&reset=true&forceLoad=false&scroll=0');
+    } else {
+      $mech->get($opts{'u'}.'standard/gui/tree.jsp?branchId='.$branchId.'&expand=false&forceLoad=false&reload=false&scroll=0');
+    }
 	}
 
 	$opts{'n'} = $branchId;
@@ -594,191 +593,191 @@ sub ics_output {
 	my $data = $_[0];
 	my $p = HTML::TokeParser->new(\$data);
 
-$token = $p->get_tag("table");
-$token = $p->get_tag("tr");
-$token = $p->get_tag("tr");
+  $token = $p->get_tag("table");
+  $token = $p->get_tag("tr");
+  $token = $p->get_tag("tr");
 
-while ($token = $p->get_tag("tr")) {
-	my $date;
-	my $id;
-	my $course;
-	my $hour;
-	my $duration;
-	my $trainers;
-	my $trainees;
-	my $rooms;
-	my $equipment;
-	my $statuts;
-	my $groupes;
-	my $module;
-	my $formation_UV;
+  while ($token = $p->get_tag("tr")) {
+    my $date;
+    my $id;
+    my $course;
+    my $hour;
+    my $duration;
+    my $trainers;
+    my $trainees;
+    my $rooms;
+    my $equipment;
+    my $statuts;
+    my $groupes;
+    my $module;
+    my $formation_UV;
 
-	#######################################
-	# This part is not generic enough to work well with all installation but has been largy improved in version 3.2
-	#######################################
+    #######################################
+    # This part is not generic enough to work well with all installation but has been largy improved in version 3.2
+    #######################################
 
-	# showTabDate
-	$token = $p->get_tag("span");
-	$date = $p->get_trimmed_text; # 12/05/2006
+    # showTabDate
+    $token = $p->get_tag("span");
+    $date = $p->get_trimmed_text; # 12/05/2006
 
-	# showTabActivity
-	$token = $p->get_tag("a");
-	$id = $token->[1]{href};
-	$id =~ /\((\d+)\)/;
-	$id = $1;
-	$course = $p->get_trimmed_text; # INF 423 Cours 1 et 2
+    # showTabActivity
+    $token = $p->get_tag("a");
+    $id = $token->[1]{href};
+    $id =~ /\((\d+)\)/;
+    $id = $1;
+    $course = $p->get_trimmed_text; # INF 423 Cours 1 et 2
 
-	# showTabHour
-	$token = $p->get_tag("td");
-	$hour = $p->get_trimmed_text; # 13h30 | 15:30
+    # showTabHour
+    $token = $p->get_tag("td");
+    $hour = $p->get_trimmed_text; # 13h30 | 15:30
 
-	# showTabDuration
-	$token = $p->get_tag("td");
-	$duration = $p->get_trimmed_text; # 2h50min | 2h | 50min
+    # showTabDuration
+    $token = $p->get_tag("td");
+    $duration = $p->get_trimmed_text; # 2h50min | 2h | 50min
 
-	# showTabTrainees
-	$token = $p->get_tag("td");
-	$trainees = $p->get_text('td'); #
+    # showTabTrainees
+    $token = $p->get_tag("td");
+    $trainees = $p->get_text('td'); #
 
-	# showTabInstructors
-	$token = $p->get_tag("td");
-	$trainers = $p->get_text('td'); # LEROUX Camille
+    # showTabInstructors
+    $token = $p->get_tag("td");
+    $trainers = $p->get_text('td'); # LEROUX Camille
 
-	# showTabRooms
-	$token = $p->get_tag("td");
-	$rooms = $p->get_text('td'); # B03-132A
+    # showTabRooms
+    $token = $p->get_tag("td");
+    $rooms = $p->get_text('td'); # B03-132A
 
-	# showTabResources
-	$token = $p->get_tag("td");
-	$equipment = $p->get_text('td');
+    # showTabResources
+    $token = $p->get_tag("td");
+    $equipment = $p->get_text('td');
 
-	# showTabCategory5
-	$token = $p->get_tag("td");
-	$statuts = $p->get_text('td'); # Validé
+    # showTabCategory5
+    $token = $p->get_tag("td");
+    $statuts = $p->get_text('td'); # Validé
 
-	# showTabCategory6
-	$token = $p->get_tag("td");
-	$groupes = $p->get_text('td'); # Groupe UV2 MAJ INF 423
+    # showTabCategory6
+    $token = $p->get_tag("td");
+    $groupes = $p->get_text('td'); # Groupe UV2 MAJ INF 423
 
-	# showTabCategory7
-	$token = $p->get_tag("td");
-	$module = $p->get_text('td'); # FIP ELP103 Electronique numerique : Logique combinatoire
+    # showTabCategory7
+    $token = $p->get_tag("td");
+    $module = $p->get_text('td'); # FIP ELP103 Electronique numerique : Logique combinatoire
 
-	# showTabCategory8
-	$token = $p->get_tag("td");
-	$formation_UV = $p->get_trimmed_text; # Enseignements INF S3 UV2 MAJ INF Automne Majeure INF UV2
+    # showTabCategory8
+    $token = $p->get_tag("td");
+    $formation_UV = $p->get_trimmed_text; # Enseignements INF S3 UV2 MAJ INF Automne Majeure INF UV2
 
-	#######################################
-	if(0) { #used for debug
-		print "Date:		$date\n";
-		print "Id:		$id\n";
-		print "course:		$course\n";
-		print "hour:		$hour\n";
-		print "duration:	$duration\n";
-		print "trainers:	$trainers\n";
-		print "trainees:	$trainees\n";
-		print "rooms:		$rooms\n";
-		print "equipment:	$equipment\n";
-		print "statuts:		$statuts\n";
-		print "groupes:	$groupes\n";
-		print "module:		$module\n";
-		print "formation_UV:	$formation_UV\n";
-		print "\n";
-		next;
-	}
-	#######################################
+    #######################################
+    if(0) { #used for debug
+      print "Date:		$date\n";
+      print "Id:		$id\n";
+      print "course:		$course\n";
+      print "hour:		$hour\n";
+      print "duration:	$duration\n";
+      print "trainers:	$trainers\n";
+      print "trainees:	$trainees\n";
+      print "rooms:		$rooms\n";
+      print "equipment:	$equipment\n";
+      print "statuts:		$statuts\n";
+      print "groupes:	$groupes\n";
+      print "module:		$module\n";
+      print "formation_UV:	$formation_UV\n";
+      print "\n";
+      next;
+    }
+    #######################################
 
-	$date =~ m|(\d+)/(\d+)/(\d+)|;
-	my $ics_day = sprintf("%02d%02d%02d",$3,$2,$1);
-	$hour =~ m|(\d+)[h:](\d+)|;
+    $date =~ m|(\d+)/(\d+)/(\d+)|;
+    my $ics_day = sprintf("%02d%02d%02d",$3,$2,$1);
+    $hour =~ m|(\d+)[h:](\d+)|;
 
-	my $ics_start_hour = $1;
-	my $ics_start_minute = $2;
-	my $ics_start_date = $ics_day.'T'.sprintf("%02d%02d00",$1,$2);
+    my $ics_start_hour = $1;
+    my $ics_start_minute = $2;
+    my $ics_start_date = $ics_day.'T'.sprintf("%02d%02d00",$1,$2);
 
-	my $ics_duration_hours;
-	my $ics_duration_minutes;
-	my $ics_stop_date;
-	my $ics_duration;
+    my $ics_duration_hours;
+    my $ics_duration_minutes;
+    my $ics_stop_date;
+    my $ics_duration;
 
-	if ($duration =~ m|^(\d+)h(\d+)|) {
-		$ics_duration_hours = $1;
-		$ics_duration_minutes = $2;
-	} elsif ($duration =~ m|^(\d+)h|) {
-		$ics_duration_hours = $1;
-		$ics_duration_minutes = 0;
-	} elsif ($duration =~ m|^(\d+)m|) {
-		$ics_duration_hours = 0;
-		$ics_duration_minutes = $1;
-	} else {
-		die "Error 14 : date $duration can't be parsed";
-	}
+    if ($duration =~ m|^(\d+)h(\d+)|) {
+      $ics_duration_hours = $1;
+      $ics_duration_minutes = $2;
+    } elsif ($duration =~ m|^(\d+)h|) {
+      $ics_duration_hours = $1;
+      $ics_duration_minutes = 0;
+    } elsif ($duration =~ m|^(\d+)m|) {
+      $ics_duration_hours = 0;
+      $ics_duration_minutes = $1;
+    } else {
+      die "Error 14 : date $duration can't be parsed";
+    }
 
-	my $ics_end_hours = $ics_start_hour+$ics_duration_hours;
-	my $ics_end_minutes = $ics_start_minute+$ics_duration_minutes;
+    my $ics_end_hours = $ics_start_hour+$ics_duration_hours;
+    my $ics_end_minutes = $ics_start_minute+$ics_duration_minutes;
 
-	while ($ics_end_minutes >= 60) {
-		$ics_end_minutes -= 60;
-		$ics_end_hours += 1;
-	}
+    while ($ics_end_minutes >= 60) {
+      $ics_end_minutes -= 60;
+      $ics_end_hours += 1;
+    }
 
-	$ics_stop_date = $ics_day.'T'.sprintf('%02d%02d00',$ics_end_hours, $ics_end_minutes);
-	$ics_duration = "PT".sprintf('%02d', $ics_duration_hours)."H".sprintf('%02d', $ics_duration_minutes)."M0S";
+    $ics_stop_date = $ics_day.'T'.sprintf('%02d%02d00',$ics_end_hours, $ics_end_minutes);
+    $ics_duration = "PT".sprintf('%02d', $ics_duration_hours)."H".sprintf('%02d', $ics_duration_minutes)."M0S";
 
-	my ($tssec,$tsmin,$tshour,$tsmday,$tsmon,$tsyear,$tswday,$tsyday,$tsisdst) = gmtime();
-	my $dtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour, $tsmin, $tssec);
+    my ($tssec,$tsmin,$tshour,$tsmday,$tsmon,$tsyear,$tswday,$tsyday,$tsisdst) = gmtime();
+    my $dtstamp = sprintf("%02d%02d%02dT%02d%02d%02dZ", $tsyear+1900, $tsmon + 1, $tsmday, $tshour, $tsmin, $tssec);
 
-	if ($opts{'b'}) {
-		my @res = split(/,/, $opts{'b'});
-		my $temp;
-		foreach $temp (@res) {
-			if ($course =~ m/$temp/) {
-				print "BEGIN:VEVENT\n";
-				print "DTSTART;TZID=Europe/Paris:$ics_start_date\n";
-				print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
-				print "SUMMARY:$course\n";
-				print "DTSTAMP:$dtstamp\n";
-				print "UID:edt-$id-0\n";		
-				print "DESCRIPTION:";
-				print "Salle : $rooms".'\n';
-				print "Enseignants : $trainers".'\n';
-				print "Cours : $course".'\n' if ($course !~ /^\s+$/);
-				print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
-				print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
-				print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
-				print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
-				print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
-				print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
-				print "\n";
-				print "LOCATION:$rooms\n";
-				print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
-				print "END:VEVENT\n";
-			}
-		}
-	}
-	else {
-	print "BEGIN:VEVENT\n";
-	print "DTSTART;TZID=Europe/Paris:$ics_start_date\n";
-	print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
-	print "SUMMARY:$course\n";
-	print "DTSTAMP:$dtstamp\n";
-	print "UID:edt-$id-0\n";		
-	print "DESCRIPTION:";
-	print "Salle : $rooms".'\n';
-	print "Enseignants : $trainers".'\n';
-	print "Cours : $course".'\n' if ($course !~ /^\s+$/);
-	print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
-	print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
-	print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
-	print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
-	print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
-	print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
-	print "\n";
-	print "LOCATION:$rooms\n";
-	print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
-	print "END:VEVENT\n";
-}
-}
+    if ($opts{'b'}) {
+      my @res = split(/,/, $opts{'b'});
+      my $temp;
+      foreach $temp (@res) {
+        if ($course =~ m/$temp/) {
+          print "BEGIN:VEVENT\n";
+          print "DTSTART;TZID=Europe/Paris:$ics_start_date\n";
+          print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
+          print "SUMMARY:$course\n";
+          print "DTSTAMP:$dtstamp\n";
+          print "UID:edt-$id-0\n";		
+          print "DESCRIPTION:";
+          print "Salle : $rooms".'\n';
+          print "Enseignants : $trainers".'\n';
+          print "Cours : $course".'\n' if ($course !~ /^\s+$/);
+          print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
+          print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
+          print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
+          print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
+          print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
+          print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
+          print "\n";
+          print "LOCATION:$rooms\n";
+          print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
+          print "END:VEVENT\n";
+        }
+      }
+    }
+    else {
+      print "BEGIN:VEVENT\n";
+      print "DTSTART;TZID=Europe/Paris:$ics_start_date\n";
+      print "DTEND;TZID=Europe/Paris:$ics_stop_date\n";
+      print "SUMMARY:$course\n";
+      print "DTSTAMP:$dtstamp\n";
+      print "UID:edt-$id-0\n";		
+      print "DESCRIPTION:";
+      print "Salle : $rooms".'\n';
+      print "Enseignants : $trainers".'\n';
+      print "Cours : $course".'\n' if ($course !~ /^\s+$/);
+      print "Etudiants : $trainees".'\n' if ($trainees !~ /^\s+$/);
+      print "Groupes	: $groupes".'\n' if ($groupes !~ /^\s+$/);
+      print "Modules	: $module".'\n' if ($module !~ /^\s+$/);
+      print "Formations/UV : $formation_UV".'\n' if ($formation_UV !~ /^\s+$/);
+      print "Equipements : $equipment".'\n' if ($equipment !~ /^\s+$/);
+      print "Statuts	: $statuts" if ($statuts !~ /^\s+$/);
+      print "\n";
+      print "LOCATION:$rooms\n";
+      print "URL;VALUE=URI:".$opts{'u'}."custom/modules/plannings/eventInfo.jsp?eventId=$id\n";
+      print "END:VEVENT\n";
+    }
+  }
 }
 
 sub debug_url {
