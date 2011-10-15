@@ -20,7 +20,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # TODO
-# - Base config should be in an external file.
 # - TZID should not be statically set.
 # - Add possibility to stop the script before starting to log on the website if option c match some string
 #  (would be usefull for the cgi version where some users still try to load older project no longer used
@@ -40,72 +39,11 @@ use POSIX;
 use CGI qw(param header);
 
 ############################################
-# Default school
+# Configuration 
 
-# You may have to change this with your school name
-# Script comes with configuration for TelecomBretagne and Ensimag (case sensitive)
-# You may need to create a new configuration for you school bellow
-
-my $default_school = 'UM2';
+our %config;
+require "config.pl";
 ############################################
-
-# School configuration
-my %default_config;
-#For Montpellier 2
-$default_config{'UM2'}{'u'} = 'http://planning.univ-montp2.fr:8080/ade/';
-$default_config{'UM2'}{'l'} = 'visuFDS';
-$default_config{'UM2'}{'p'} = '12345678';
-$default_config{'UM2'}{'w'} = 0;
-$default_config{'UM2'}{'c'} = 0;
-$default_config{'UM2'}{'d'} = undef;
-
-# For TelecomBretagne
-$default_config{'TelecomBretagne'}{'u'} = 'http://edt.telecom-bretagne.eu/ade/';
-$default_config{'TelecomBretagne'}{'l'} = '';
-$default_config{'TelecomBretagne'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'TelecomBretagne'}{'w'} = 0;
-$default_config{'TelecomBretagne'}{'c'} = 1;
-$default_config{'TelecomBretagne'}{'d'} = undef;
-
-# For Ensimag
-$default_config{'Ensimag'}{'u'} = 'http://ade52-inpg.grenet.fr/ade/';
-$default_config{'Ensimag'}{'l'} = 'voirIMATEL';
-$default_config{'Ensimag'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'Ensimag'}{'w'} = 0;
-$default_config{'Ensimag'}{'c'} = 0;
-$default_config{'Ensimag'}{'d'} = undef;
-
-# For UPMF
-$default_config{'UPMF'}{'u'} = 'http://ade52-upmf.grenet.fr/';
-$default_config{'UPMF'}{'l'} = '';
-$default_config{'UPMF'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'UPMF'}{'w'} = 0;
-$default_config{'UPMF'}{'c'} = 0;
-$default_config{'UPMF'}{'d'} = undef;
-
-# For UJF
-$default_config{'UJF'}{'u'} = 'http://ade52-ujf.grenet.fr/';
-$default_config{'UJF'}{'l'} = '';
-$default_config{'UJF'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'UJF'}{'w'} = 0;
-$default_config{'UJF'}{'c'} = 0;
-$default_config{'UJF'}{'d'} = undef;
-
-# For Mines Albi
-$default_config{'MA'}{'u'} = 'http://ade.mines-albi.fr:8080/ade/';
-$default_config{'MA'}{'l'} = '';
-$default_config{'MA'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'MA'}{'w'} = 0;
-$default_config{'MA'}{'c'} = 0;
-$default_config{'MA'}{'d'} = undef;
-
-# For Unviv Tours
-$default_config{'UT'}{'u'} = 'http://emploidutemps.univ-tours.fr/ade/';
-$default_config{'UT'}{'l'} = '';
-$default_config{'UT'}{'p'} = ''; # Should be commented if your ADE system don't need a password
-$default_config{'UT'}{'w'} = 0;
-$default_config{'UT'}{'c'} = 1;
-$default_config{'UT'}{'d'} = 'univ-tours.fr'; # univ-tours.fr or etu.univ-tours.fr
 
 my %opts;
 my @tree;
@@ -114,19 +52,17 @@ my @tree;
 binmode(STDOUT, ":encoding(UTF-8)");
 $| = 1;
 
-$opts{'s'} = $default_school;
-
 if (!defined $ENV{REQUEST_METHOD}) {
 
   GetOptions(\%opts, 'y=s', 'n=s', 'a=s', 'u=s', 'l=s', 's=s', 'p:s', 'w!', 'v!', 'd=s', 'c!', 'b:s');
 
-  $opts{'u'} = $opts{'u'} || $default_config{$opts{'s'}}{'u'};
-  $opts{'l'} = $opts{'l'} || $default_config{$opts{'s'}}{'l'};
-  $opts{'p'} = $opts{'p'} || $default_config{$opts{'s'}}{'p'};
-  $opts{'w'} = $opts{'w'} || $default_config{$opts{'s'}}{'w'};
-  $opts{'v'} = $opts{'v'} || $default_config{$opts{'s'}}{'v'};
-  $opts{'d'} = $opts{'d'} || $default_config{$opts{'s'}}{'d'};
-  $opts{'b'} = $opts{'b'} || $default_config{$opts{'s'}}{'b'};
+  $opts{'u'} = $opts{'u'} || $config{'u'};
+  $opts{'l'} = $opts{'l'} || $config{'l'};
+  $opts{'p'} = $opts{'p'} || $config{'p'};
+  $opts{'w'} = $opts{'w'} || $config{'w'};
+  $opts{'v'} = $opts{'v'} || $config{'v'};
+  $opts{'d'} = $opts{'d'} || $config{'d'};
+  $opts{'b'} = $opts{'b'} || $config{'b'};
 
 
   if (!(defined($opts{'a'}) xor defined($opts{'n'})) ) {
@@ -136,8 +72,6 @@ if (!defined $ENV{REQUEST_METHOD}) {
     print STDERR " -n : numerical value of the ressource\n";
     print STDERR " -b : list of your personnal courses\n";
     print STDERR " -y : the projet name if needed\n";
-    print STDERR " -s : school name. It loads a set of default value for -u -l -p -w -c -d for your school. Default school is : $default_school. Available school are (case sensitive):\n";
-    print STDERR "\t- $_\n" foreach (keys %default_config);
     print STDERR " -u : the ADE location to peek into\n";
     print STDERR " -l : login name for authentication purpose\n";
     print STDERR " -p : password to use for authentication purpose\n";
@@ -160,16 +94,15 @@ if (!defined $ENV{REQUEST_METHOD}) {
   print header(-type => 'text/calendar; method=request; charset=UTF-8;', -attachment => 'edt.ics');
   if (defined(param('a')) or defined(param('n'))) {
     print "$opts{'b'}\n";
-    $opts{'s'} = param('s') if (defined(param('s')));
 
-    $opts{'u'} = $default_config{$opts{'s'}}{'u'};
-    $opts{'l'} = $default_config{$opts{'s'}}{'l'};
-    $opts{'p'} = $default_config{$opts{'s'}}{'p'};
-    $opts{'w'} = $default_config{$opts{'s'}}{'w'};
-    $opts{'v'} = $default_config{$opts{'s'}}{'v'};
-    $opts{'d'} = $default_config{$opts{'s'}}{'d'};
-    $opts{'c'} = $default_config{$opts{'s'}}{'c'};
-    $opts{'b'} = $default_config{$opts{'s'}}{'b'};
+    $opts{'u'} = $config{'u'};
+    $opts{'l'} = $config{'l'};
+    $opts{'p'} = $config{'p'};
+    $opts{'w'} = $config{'w'};
+    $opts{'v'} = $config{'v'};
+    $opts{'d'} = $config{'d'};
+    $opts{'c'} = $config{'c'};
+    $opts{'b'} = $config{'b'};
 
     $opts{'a'} = param('a');
     $opts{'n'} = param('n');
