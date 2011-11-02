@@ -4,7 +4,7 @@
 
 #For Montpellier 2
 our %config;
-$config{'u'} = 'HTTP://planning.univ-montp2.fr:8080/ade/';
+$config{'u'} = 'http://planning.univ-montp2.fr/ade/';
 $config{'l'} = 'visuFDS';
 $config{'p'} = '12345678';
 $config{'w'} = 0;
