@@ -33,10 +33,10 @@ Voici la liste complète des paquets nécessaires :
 
 - À ce stade, vous pouvez lancer le script dans un terminal. Voici un exemple de ligne de commande pour appeler le script (vous devez d'abord faire un cd pour être dans le répertoire du script) :
 
-$ perl ade2ics.pl -s UM2 -b FMIN108,FMIN105,FMIN302,GMIN101,GMIN104,FMIN104 -n 125 > ~/Desktop/calendar.ics
+$ perl ade2ics.pl -s UM2 -b FMIN108,FMIN105,FMIN302,GMIN101,GMIN104,FMIN104 -n 423 > ~/Desktop/calendar.ics
 
 Dans cette commande, l'argument "-b CodeUE1,CodeUE2,…" vous permet de spécifier les codes des UEs que vous suivez. 
-L'argument "-n 125" indique que ces UEs font partie du parcours Master 1 Informatique. Pour accéder aux UEs d'autres filières, vous pouvez trouver le numéro de ces filières en regardant l'emploi du temps sur le site de la fac. En effet, lorsque vous placez votre souris en survol d'une filière dans le menu à gauche, dans la barre d'adresse s'affiche quelque chose du style : 'javascript:checkBranch(125, 'true')' où le premier paramètre est le numéro de la filière.
+L'argument "-n 423" indique que ces UEs font partie du parcours Master 1 Informatique. Pour accéder aux UEs d'autres filières, vous pouvez trouver le numéro de ces filières en regardant l'emploi du temps sur le site de la fac. En effet, lorsque vous placez votre souris en survol d'une filière dans le menu à gauche, dans la barre d'adresse s'affiche quelque chose du style : 'javascript:checkBranch(423, 'true')' où le premier paramètre est le numéro de la filière.
 Enfin, la dernière partie de la commande : " > ~/Desktop/calendar.ics" permet de rediriger la sortie du script vers un fichier localisé à l'emplacement indiqué.
 
 
