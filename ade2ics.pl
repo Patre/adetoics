@@ -71,7 +71,7 @@ if (!defined $ENV{REQUEST_METHOD}) {
 	$opts{'v'} = $opts{'v'} || $default_config{$opts{'s'}}{'v'};
 	$opts{'d'} = $opts{'d'} || $default_config{$opts{'s'}}{'d'};
 	$opts{'c'} = $opts{'c'} || $default_config{$opts{'s'}}{'c'};
-	$opts{'b'} = $opts{'b'} || $default_config{$opts{'s'}}{'b'};
+	$opts{'y'} = $opts{'y'} || $default_config{$opts{'s'}}{'y'};
 	
 	if (!(defined($opts{'a'}) xor defined($opts{'n'})) ) {
 		print STDERR "Usage: $0 -a Alphabetical_path [-y Projet_name] [-s school_name] [-l login] [-p [password]] [-u ade_url] [-c [-d domain]] [-w] [-v]\n";
