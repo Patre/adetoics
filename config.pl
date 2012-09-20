@@ -67,6 +67,6 @@ $default_config{'UM2'}{'p'} = '12345678'; # Should be commented if your ADE syst
 $default_config{'UM2'}{'w'} = 0;
 $default_config{'UM2'}{'c'} = 0;
 $default_config{'UM2'}{'d'} = undef;
-$default_config{'UM2'}{'y'} = 'Faculte Des Sciences 2012-2013';
+$default_config{'UM2'}{'y'} = '-Faculte Des Sciences 2012-2013';
 
 1; #return value
